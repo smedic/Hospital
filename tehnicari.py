@@ -6,6 +6,7 @@ tehnicari = []
 def teh2str(teh):
     return ' '.join(teh['ime'], teh['prezime'], teh['korisnicko_ime'], teh['lozinka'])
 
+
 def str2teh(red) :
     if red[-1] == '\n':
         red = red[:-1]
@@ -32,17 +33,16 @@ def ucitaj_tehnicare():
         if len(red) > 1:
             teh = str2teh(red)
             if proveri_postojanje(teh):
-                print("Dodajem tehnicara!")
                 tehnicari.append(teh)
 
 
 def uloguj_se(korisnicko_ime, lozinka):
-    print("A1")
     for teh in tehnicari:
-        print("A2")
         if korisnicko_ime==teh['korisnicko_ime'] and lozinka==teh['lozinka']:
+            print("Uspesno ste se prijavili kao korisnik " + teh['ime'] + " " + teh['prezime'])
             return True
     return False
+
 
 def main():
     ucitaj_tehnicare()

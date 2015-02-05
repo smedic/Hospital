@@ -2,12 +2,14 @@ __author__ = 'stevan'
 
 pacijenti = []
 
+
 def sacuvaj_pacijente():
     file = open('pacijenti.txt', 'w')
     for pac in pacijenti:
         file.write(pac2str(pac))
         file.write('\n')
     file.close()
+
 
 def dodaj_pacijenta(pacijent):
     pronadjen = False
@@ -17,8 +19,12 @@ def dodaj_pacijenta(pacijent):
     if not pronadjen:
         pacijenti.append(pacijent)
 
+
 def obrisi_pacijenta(id):
-    pacijenti.remove(id)
+    for pac in pacijenti:
+        if pac['id'] == id:
+            pacijenti.remove(pac)
+
 
 def pac2str(pac):
     string = ' '.join([str(pac['id']),pac['ime'], pac['prezime'], pac['jmbg'], \
@@ -30,20 +36,24 @@ def pac2str(pac):
     string += str(pac['zaduzenje'])
     return string
 
+
 def formatiraj_zaglavlje():
     return \
         "\nId   |   Ime    |  Prezime   |    JMBG     |Datum rodj.|      adresa        |krv.grupa| zaduzenje  \n" \
         "-----+----------+------------+-------------+-----------+--------------------+---------+-------------"
+
 
 def formatiraj_pacijenta(pac):
     return "{0:5}|{1:10}|{2:12}|{3:13}|{4:11}|{5:>20}|{6:>9}|{7:>13}".format(
         str(pac['id']), pac['ime'], pac['prezime'], pac['jmbg'], pac['datum_rodjenja'], pac['adresa'], pac['krvna_grupa'],
         str(pac['zaduzenje']) + ',00 rsd')
 
+
 def prikazi_tabelu_pacijenata():
     print(formatiraj_zaglavlje())
     for pac in pacijenti:
         print(formatiraj_pacijenta(pac))
+
 
 def main():
 
@@ -87,10 +97,11 @@ def main():
     dodaj_pacijenta(pacijent)
     dodaj_pacijenta(pacijent2)
     dodaj_pacijenta(pacijent3)
-
+    obrisi_pacijenta(1)
     prikazi_tabelu_pacijenata()
 
     sacuvaj_pacijente()
+
 
 if __name__ == '__main__':
     main()

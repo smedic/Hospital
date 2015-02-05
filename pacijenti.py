@@ -54,6 +54,11 @@ def prikazi_tabelu_pacijenata():
     for pac in pacijenti:
         print(formatiraj_pacijenta(pac))
 
+def sortiraj_pacijente(key):
+    for i in range(0, len(pacijenti)):
+        for j in range(0, len(pacijenti)):
+            if pacijenti[j][key] > pacijenti[i][key]:
+                pacijenti[i], pacijenti[j] = pacijenti[j], pacijenti[i]
 
 def main():
 
@@ -101,6 +106,48 @@ def main():
     prikazi_tabelu_pacijenata()
 
     sacuvaj_pacijente()
+
+def dodaj_pacijente():
+    lista_pregleda = [ 'jedan', 'dva', 'tri']
+
+    pacijent = {
+        'id' : 2,
+        'ime' : 'Marko',
+        'prezime' : 'Markovic',
+        'jmbg' : '12345678910',
+        'datum_rodjenja' : '13.11.1991',
+        'adresa' : 'Nusiceva 4',
+        'krvna_grupa' : 'A-',
+        'lista_pregleda': lista_pregleda,
+        'zaduzenje' : 460
+    }
+
+    pacijent2 = {
+        'id' : 3,
+        'ime' : 'Pera',
+        'prezime' : 'Peric',
+        'jmbg' : '67676544544',
+        'datum_rodjenja' : '01.01.2001',
+        'adresa' : '4. jula',
+        'krvna_grupa' : 'A+',
+        'lista_pregleda': lista_pregleda,
+        'zaduzenje' : 5556
+    }
+
+    pacijent3 = {
+        'id' : 1,
+        'ime' : 'Milica',
+        'prezime' : 'Markov',
+        'jmbg' : '54534344444',
+        'datum_rodjenja' : '11.10.2002',
+        'adresa' : 'Knez Mihajlova 21',
+        'krvna_grupa' : '0+',
+        'lista_pregleda': lista_pregleda,
+        'zaduzenje' : 643
+    }
+    dodaj_pacijenta(pacijent)
+    dodaj_pacijenta(pacijent2)
+    dodaj_pacijenta(pacijent3)
 
 
 if __name__ == '__main__':

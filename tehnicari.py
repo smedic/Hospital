@@ -37,7 +37,9 @@ def ucitaj_tehnicare():
 
 
 def uloguj_se(korisnicko_ime, lozinka):
+    print("A1")
     for teh in tehnicari:
+        print("A2")
         if korisnicko_ime==teh['korisnicko_ime'] and lozinka==teh['lozinka']:
             return True
     return False

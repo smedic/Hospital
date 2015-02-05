@@ -1,0 +1,3 @@
+1 Marko Markovic 12345678910 13.11.1991 Nusiceva 4 A- jedan dva tri 460
+2 Pera Peric 67676544544 01.01.2001 4. jula A+ jedan dva tri 5556
+3 Milica Markov 54534344444 11.10.2002 Knez Mihajlova 21 0+ jedan dva tri 643

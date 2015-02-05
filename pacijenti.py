@@ -49,16 +49,31 @@ def formatiraj_pacijenta(pac):
         str(pac['zaduzenje']) + ',00 rsd')
 
 
-def prikazi_tabelu_pacijenata():
+def prikazi_listu_pacijenata(lista_pacijenata):
     print(formatiraj_zaglavlje())
-    for pac in pacijenti:
+    for pac in lista_pacijenata:
         print(formatiraj_pacijenta(pac))
 
+def prikazi_tabelu_pacijenata():
+    return prikazi_listu_pacijenata(pacijenti)
+
+def sortiraj_listu_pacijenata(key, lista_pacijenata):
+    for i in range(0, len(lista_pacijenata)):
+        for j in range(0, len(lista_pacijenata)):
+            if lista_pacijenata[j][key] > lista_pacijenata[i][key]:
+                lista_pacijenata[i], lista_pacijenata[j] = lista_pacijenata[j], lista_pacijenata[i]
+
 def sortiraj_pacijente(key):
-    for i in range(0, len(pacijenti)):
-        for j in range(0, len(pacijenti)):
-            if pacijenti[j][key] > pacijenti[i][key]:
-                pacijenti[i], pacijenti[j] = pacijenti[j], pacijenti[i]
+    sortiraj_listu_pacijenata(key, pacijenti)
+
+
+def pretraga_pacijenata(polje, vrednost):
+    pronadjeni = []
+    for pac in pacijenti:
+        if str(pac[polje]).upper() == str(vrednost).upper():
+            print('NASAO!')
+            pronadjeni.append(pac)
+    return pronadjeni
 
 def main():
 

@@ -1,7 +1,10 @@
 __author__ = 'stevan'
 
 pacijenti = []
+id = 1
 
+def broj_pacijenata():
+    return len(pacijenti)
 
 def sacuvaj_pacijente():
     file = open('pacijenti.txt', 'w')
@@ -12,13 +15,15 @@ def sacuvaj_pacijente():
 
 
 def dodaj_pacijenta(pacijent):
-    pronadjen = False
     for pac in pacijenti:
-        if pac['id'] == pacijent['id'] or pac['jmbg'] == pacijent['jmbg']:
-            pronadjen = True
-    if not pronadjen:
-        pacijenti.append(pacijent)
-
+        if pac['jmbg'] == pacijent['jmbg']:
+            print("Pacijent vec postoji!")
+            return False
+    global id
+    pacijent['id']= id
+    id += 1
+    pacijenti.append(pacijent)
+    return True
 
 def obrisi_pacijenta(id):
     for pac in pacijenti:
@@ -28,8 +33,8 @@ def obrisi_pacijenta(id):
 
 def pac2str(pac):
     string = ' '.join([str(pac['id']),pac['ime'], pac['prezime'], pac['jmbg'], \
-                    pac['datum_rodjenja'], pac['adresa'], pac['krvna_grupa']], \
-                      pac['lista_pregleda'] , pac['zaduzenje'])
+                    pac['datum_rodjenja'], pac['adresa'], pac['krvna_grupa'], \
+                      pac['lista_pregleda'] , str(pac['zaduzenje']) ])
     return string
 
 
@@ -47,7 +52,7 @@ def formatiraj_zaglavlje_list_pregleda():
 def formatiraj_pacijenta(pac):
     return "{0:5}|{1:10}|{2:12}|{3:13}|{4:11}|{5:>20}|{6:>9}|{7:>13}".format(
         str(pac['id']), pac['ime'], pac['prezime'], pac['jmbg'], pac['datum_rodjenja'], pac['adresa'], pac['krvna_grupa'],
-        str(pac['zaduzenje']) + ',00 rsd')
+        format(pac['zaduzenje'], '.2f') + ' rsd')
 
 
 def formatiraj_listu_pregleda(pac):
@@ -89,6 +94,8 @@ def pronadji_pacijenta(polje, vrednost):
 
 def pronadji_pacijenta_po_id(vrednost):
     return pronadji_pacijenta('id', vrednost)
+
+
 
 
 def dodaj_pacijente():

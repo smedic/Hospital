@@ -3,8 +3,10 @@ __author__ = 'stevan'
 pacijenti = []
 id = 1
 
+
 def broj_pacijenata():
     return len(pacijenti)
+
 
 def sacuvaj_pacijente():
     file = open('pacijenti.txt', 'w')
@@ -38,15 +40,14 @@ def pac2str(pac):
     return string
 
 
-def formatiraj_zaglavlje():
-    return \
-        "\nId   |   Ime    |  Prezime   |    JMBG     |Datum rodj.|      adresa        |krv.grupa| zaduzenje  \n" \
-        "-----+----------+------------+-------------+-----------+--------------------+---------+-------------"
-
-def formatiraj_zaglavlje_list_pregleda():
+def formatiraj_zaglavlje_liste_pregleda():
     return \
         "\n Lista pregleda: \n" \
         "----------------------------------------------------------------------------------------------------"
+
+
+def formatiraj_listu_pregleda(pac):
+    return "{0:50}".format(pac['lista_pregleda'])
 
 
 def formatiraj_pacijenta(pac):
@@ -55,26 +56,31 @@ def formatiraj_pacijenta(pac):
         format(pac['zaduzenje'], '.2f') + ' rsd')
 
 
-def formatiraj_listu_pregleda(pac):
-    return "{0:50}".format(pac['lista_pregleda'])
+def formatiraj_zaglavlje_liste_pacijenata():
+    return \
+        "\nId   |   Ime    |  Prezime   |    JMBG     |Datum rodj.|      adresa        |krv.grupa| zaduzenje  \n" \
+        "-----+----------+------------+-------------+-----------+--------------------+---------+-------------"
 
 
 def prikazi_listu_pacijenata(lista_pacijenata):
-    print(formatiraj_zaglavlje())
+    print(formatiraj_zaglavlje_liste_pacijenata())
     for pac in lista_pacijenata:
         print(formatiraj_pacijenta(pac))
+
 
 def prikazi_tabelu_pacijenata():
     return prikazi_listu_pacijenata(pacijenti)
 
-def sortiraj_listu_pacijenata(key, lista_pacijenata):
+
+def sortiraj_listu_pacijenata(polje, lista_pacijenata):
     for i in range(0, len(lista_pacijenata)):
         for j in range(0, len(lista_pacijenata)):
-            if lista_pacijenata[j][key] > lista_pacijenata[i][key]:
+            if lista_pacijenata[j][polje] > lista_pacijenata[i][polje]:
                 lista_pacijenata[i], lista_pacijenata[j] = lista_pacijenata[j], lista_pacijenata[i]
 
-def sortiraj_pacijente(key):
-    sortiraj_listu_pacijenata(key, pacijenti)
+
+def sortiraj_pacijente(polje):
+    sortiraj_listu_pacijenata(polje, pacijenti)
 
 
 def pretraga_pacijenata(polje, vrednost):
@@ -86,11 +92,13 @@ def pretraga_pacijenata(polje, vrednost):
             pronadjeni.append(pac)
     return pronadjeni
 
+
 def pronadji_pacijenta(polje, vrednost):
     for pac in pacijenti:
         if str(pac[polje]).upper() == str(vrednost).upper():
             return pac
     return ''
+
 
 def pronadji_pacijenta_po_id(vrednost):
     return pronadji_pacijenta('id', vrednost)

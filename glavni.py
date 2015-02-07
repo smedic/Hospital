@@ -4,6 +4,7 @@ import pacijenti
 import tehnicari
 from datetime import datetime
 
+
 def proveri_datum(datum):
     try:
         datetime.strptime(datum, "%d/%m/%Y")
@@ -13,11 +14,14 @@ def proveri_datum(datum):
     if datetime.strptime(datum, "%d/%m/%Y") > datetime.now():
         print("Unesite ispravan datum rodjenja!")
         return False
+    return True
+
 
 def logovanje():
     korisnicko_ime = input("Korisnicko ime >> ")
     lozinka = input("Lozinka >> ")
     return tehnicari.uloguj_se(korisnicko_ime, lozinka)
+
 
 def meni():
     prikazi_meni()
@@ -27,6 +31,7 @@ def meni():
         prikazi_meni()
         komanda = input(">> ")
     return komanda.upper()
+
 
 def prikazi_meni():
     print("\nIzaberite opciju:")
@@ -40,6 +45,7 @@ def prikazi_meni():
 
 ########################################################################################################################
 ## opcija 1 ##
+
 
 def opcija_1():
     pacijenti.sortiraj_pacijente('id')
@@ -56,6 +62,7 @@ def opcija_1():
         elif komanda == '3':
             pacijenti.sortiraj_pacijente('prezime')
             pacijenti.prikazi_tabelu_pacijenata()
+
 
 def meni_1():
     prikazi_meni_1()
@@ -79,8 +86,6 @@ def prikazi_meni_1():
 ## opcija 2 ##
 
 def opcija_2():
-    pacijenti.sortiraj_pacijente('id')
-    pacijenti.prikazi_tabelu_pacijenata()
     komanda = '0'
     while komanda != 'X':
         komanda = meni_2()
@@ -130,7 +135,6 @@ def opcija_3():
 
     komanda = '0'
     while komanda != 'X':
-
         if pac != '':
             prikazi_sve_informacije(pac)
             komanda = meni_3()
@@ -167,9 +171,9 @@ def prikazi_meni_3():
     print(" x - vrati se u glavni meni")
 
 def prikazi_sve_informacije(pac):
-    print(pacijenti.formatiraj_zaglavlje())
+    print(pacijenti.formatiraj_zaglavlje_liste_pacijenata())
     print(pacijenti.formatiraj_pacijenta(pac))
-    print(pacijenti.formatiraj_zaglavlje_list_pregleda())
+    print(pacijenti.formatiraj_zaglavlje_liste_pregleda())
     print(pacijenti.formatiraj_listu_pregleda(pac))
 
 

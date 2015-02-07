@@ -4,47 +4,6 @@ import pacijenti
 import tehnicari
 from datetime import datetime
 
-def main():
-    tehnicari.ucitaj_tehnicare()
-    #pacijenti.dodaj_pacijente()
-    print()
-    print("Evidencija pacijenata")
-    print("====================")
-    print()
-    if not logovanje():
-        print("\nNiste uneli postojece ime i lozinku!")
-        return
-    komanda = '0'
-    while komanda != 'X':
-        komanda = meni()
-        if komanda == '1':
-            if pacijenti.broj_pacijenata() > 0:
-                opcija_1()
-            else:
-                print("Nema pacijenata u bazi!")
-        elif komanda == '2':
-            if pacijenti.broj_pacijenata() > 0:
-                opcija_2()
-            else:
-                print("Nema pacijenata u bazi!")
-        elif komanda == '3':
-            if pacijenti.broj_pacijenata() > 0:
-                opcija_3()
-            else:
-                print("Nema pacijenata u bazi!")
-        elif komanda == '4':
-            opcija_4()
-        elif komanda == '5':
-            if pacijenti.broj_pacijenata() > 0:
-                opcija_5()
-            else:
-                print("Nema pacijenata u bazi!")
-        elif komanda == '6':
-            print()
-        else:
-            print("Kraj programa!")
-
-
 def proveri_datum(datum):
     try:
         datetime.strptime(datum, "%d/%m/%Y")
@@ -165,6 +124,8 @@ def prikazi_meni_2():
 def opcija_3():
 
     vrednost = input("\nUnesite id pacijenta >>")
+    while not vrednost.isdigit() :
+        vrednost = input("Nepravilan unos! Ponovite unos >>")
     pac = pacijenti.pronadji_pacijenta_po_id(vrednost)
 
     komanda = '0'
@@ -279,6 +240,64 @@ def opcija_5():
     id = input("\nUneti id pacijenta koga zelite da obrisite iz liste >>")
     pacijenti.obrisi_pacijenta(id)
     pacijenti.prikazi_tabelu_pacijenata()
+
+
+def opcija_6():
+    pac = pacijenti.pronadji_najmanje_zaduzenog()
+    print("\n[6]Najmanje zaduzen je: " + pac['ime'] + " " + pac['prezime'] + \
+        " i duzan je: " + format(pac['zaduzenje'], '.2f'))
+    pac = pacijenti.pronadji_navise_zaduzenog()
+    print("Najvise zaduzen je: " + pac['ime'] + " " + pac['prezime'] + \
+        " i duzan je: " + format(pac['zaduzenje'], '.2f'))
+    print("Prosecno zaduzenje: " + format(pacijenti.pronadji_prosecno_zaduzenje(), '.2f'))
+    print("Ukupno zaduzenje: " + format(pacijenti.pronadji_ukupno_zaduzenje(), '.2f'))
+
+########################################################################################################################
+## MAIN ##
+
+
+def main():
+    tehnicari.ucitaj_tehnicare()
+    pacijenti.dodaj_pacijente()
+    print()
+    print("Evidencija pacijenata")
+    print("====================")
+    print()
+    if not logovanje():
+        print("\nNiste uneli postojece ime i lozinku!")
+        return
+    komanda = '0'
+    while komanda != 'X':
+        komanda = meni()
+        if komanda == '1':
+            if pacijenti.broj_pacijenata() > 0:
+                opcija_1()
+            else:
+                print("Nema pacijenata u bazi!")
+        elif komanda == '2':
+            if pacijenti.broj_pacijenata() > 0:
+                opcija_2()
+            else:
+                print("Nema pacijenata u bazi!")
+        elif komanda == '3':
+            if pacijenti.broj_pacijenata() > 0:
+                opcija_3()
+            else:
+                print("Nema pacijenata u bazi!")
+        elif komanda == '4':
+            opcija_4()
+        elif komanda == '5':
+            if pacijenti.broj_pacijenata() > 0:
+                opcija_5()
+            else:
+                print("Nema pacijenata u bazi!")
+        elif komanda == '6':
+            if pacijenti.broj_pacijenata() >0:
+                opcija_6()
+            else:
+                print("Nema pacijenata u bazi!")
+        else:
+            print("Kraj programa!")
 
 if __name__ == "__main__":
     main()

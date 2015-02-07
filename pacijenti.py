@@ -96,7 +96,31 @@ def pronadji_pacijenta_po_id(vrednost):
     return pronadji_pacijenta('id', vrednost)
 
 
+def pronadji_najmanje_zaduzenog():
+    min = pacijenti[0]
+    for pac in pacijenti:
+        if pac['zaduzenje'] < min['zaduzenje'] :
+            min = pac
+    return min
 
+def pronadji_navise_zaduzenog():
+    max = pacijenti[0]
+    for pac in pacijenti:
+        if pac['zaduzenje'] > max['zaduzenje'] :
+            max = pac
+    return max
+
+def pronadji_prosecno_zaduzenje():
+    ukupno = 0.00
+    for pac in pacijenti:
+        ukupno += pac['zaduzenje']
+    return ukupno/float(len(pacijenti))
+
+def pronadji_ukupno_zaduzenje():
+    ukupno = 0.00
+    for pac in pacijenti:
+        ukupno += pac['zaduzenje']
+    return ukupno
 
 def dodaj_pacijente():
 
@@ -109,7 +133,7 @@ def dodaj_pacijente():
         'adresa' : 'Nusiceva 4',
         'krvna_grupa' : 'A-',
         'lista_pregleda': 'jedan | dva | tri',
-        'zaduzenje' : 460
+        'zaduzenje' : 460.11
     }
 
     pacijent2 = {
@@ -121,7 +145,7 @@ def dodaj_pacijente():
         'adresa' : '4. jula',
         'krvna_grupa' : 'A+',
         'lista_pregleda': 'jedan | dva | tri',
-        'zaduzenje' : 5556
+        'zaduzenje' : 5556.00
     }
 
     pacijent3 = {
@@ -133,7 +157,7 @@ def dodaj_pacijente():
         'adresa' : 'Knez Mihajlova 21',
         'krvna_grupa' : '0+',
         'lista_pregleda': 'jedan | dva | tri',
-        'zaduzenje' : 643
+        'zaduzenje' : 643.55
     }
     dodaj_pacijenta(pacijent)
     dodaj_pacijenta(pacijent2)
